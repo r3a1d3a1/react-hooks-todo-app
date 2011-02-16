@@ -24,6 +24,7 @@ function App() {
     // State.Provider passes the state and dispatcher to the down
     <Store.Provider value={{ state, dispatch }}>
       <div style={ state.show_tags ? { pointerEvents: 'none', opacity: 0.4 } : null }>
+        <br/>
         <TodoForm />
         <TodoList />
       </div>

@@ -23,7 +23,7 @@
     -->
   <title>React App</title>
   <style>
-    .tagsModal {
+    .tags-modal {
       position: fixed;
       top: 20vh;
       left: 40vw;
@@ -32,6 +32,16 @@
       border: 1px solid grey;
       display: inline-table;
       z-index: 1;
+    }
+    .inline-tags > .row {
+      overflow-x: auto;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+    .inline-tags > .row > .col {
+      display: inline-block;
+      float: none;
+      flex-grow: 0;
     }
   </style>
 </head>

@@ -17,7 +17,7 @@ export default function TagsModal() {
   }
 
   return (
-	<div className="tagsModal text-center">
+	<div className="tags-modal text-center">
 		<ul className="list-group">
 			{formattedTags
 			.map((t,tagUID) => (
@@ -33,7 +33,8 @@ export default function TagsModal() {
 				</li> ))
 			}
 		</ul>
-    <TagForm />
+		<br/>
+    	<TagForm />
 		<button className="btn-default btn-sm" style={{marginTop: 25}} onClick={()=>dispatch({ type: "TOGGLE_TAGS_VISIBILITY" })}>Close</button>
   	</div>
   );

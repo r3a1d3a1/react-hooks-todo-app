@@ -22,23 +22,18 @@ export default function TagForm() {
   }
 
   return (
-    <div className="row">
-      <div className="col-md-12">
-        <br />
-        <div className="input-group">
-          <input
-            className="form-control"
-            value={tag}
-            placeholder="Enter new tag"
-            onKeyUp={handleSubmitForm}
-            onChange={handleTagChange}
-          />
-          <div className="input-group-append">
-            <button className="btn btn-primary" onClick={handleTagAdd}>
-              Add
-            </button>
-          </div>
-        </div>
+    <div className="input-group">
+      <input
+        className="form-control"
+        value={tag}
+        placeholder="Enter new tag"
+        onKeyUp={handleSubmitForm}
+        onChange={handleTagChange}
+      />
+      <div className="input-group-append">
+        <button className="btn btn-primary" onClick={handleTagAdd}>
+          Add
+        </button>
       </div>
     </div>
   );

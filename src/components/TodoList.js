@@ -13,7 +13,7 @@ export default function TodoList() {
       <h4>Yay! All todos are done! Take a rest!</h4>
     ) : (
       <TodoHeader>
-        <span className="float-right">{pluralize(state.todos.length)}</span>
+        <span className="float-right d-none d-sm-block">{pluralize(state.todos.length)}</span>
       </TodoHeader>
     );
   let toggle_completed_visibility_label =
@@ -41,59 +41,57 @@ export default function TodoList() {
 
   const hasCompletedTodos = state.todos.find(x => x.completed);
   return (
-    <div className="row">
-      <div className="col-md-12">
-        <div className="row">
-          <div className="col-md-12">
-            <br />
-            {header}
-          </div>
-        </div>
-        { hasCompletedTodos &&
-          <div className="row">
-            <div className="col-md-12">
-              <button
-                className="float-right btn-info"
-                style={{ marginBottom: 12 }}
-                onClick={() => dispatch({ type: "TOGGLE_COMPLETED_VISIBILITY" })}
-              >
-                {toggle_completed_visibility_label}
-              </button>
-            </div>
-          </div>
-        }
-        <div className="row">
-          <div className="col-md-12">
-            <ul className="list-group">
-              {state.todos
-                .filter(t => t.completed === false)
-                .map(t => (
-                  <li key={t.title} className="list-group-item">
-                    <div className="row">
-                      <div className="col-md-6">{t.title}</div>
-                      <div className="col-md-3">
-                        {tags(state.todos.indexOf(t))}
-                      </div>
-                      <div className="col-md-3">
-                        <button
-                          className="float-right btn-danger btn-sm"
-                          style={{ marginLeft: 10 }}
-                          onClick={() =>
-                            dispatch({ type: "TOGGLE_COMPLETE", payload: t.title })
-                          }
-                        >
-                          Complete
-                        </button>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-            </ul>
-            { hasCompletedTodos && completed_section }
-          </div>
+    <>
+      <div className="row">
+        <div className="col-12">
+          <br />
+          {header}
         </div>
       </div>
-    </div>
+      { hasCompletedTodos &&
+        <div className="row">
+          <div className="col-12">
+            <button
+              className="float-right btn-info"
+              style={{ marginBottom: 12 }}
+              onClick={() => dispatch({ type: "TOGGLE_COMPLETED_VISIBILITY" })}
+            >
+              {toggle_completed_visibility_label}
+            </button>
+          </div>
+        </div>
+      }
+      <div className="row">
+        <div className="col-12">
+          <ul className="list-group">
+            {state.todos
+              .filter(t => t.completed === false)
+              .map(t => (
+                <li key={t.title} className="list-group-item">
+                  <div className="row align-items-center">
+                    <div className="col-10 col-sm-5">{t.title}</div>
+                    <div className="d-none d-sm-inline-block col-sm-5">
+                      {tags(state.todos.indexOf(t))}
+                    </div>
+                    <div className="col-2">
+                      <button
+                        className="float-right btn-danger btn-sm"
+                        style={{ marginLeft: 10 }}
+                        onClick={() =>
+                          dispatch({ type: "TOGGLE_COMPLETE", payload: t.title })
+                        }
+                      >
+                        Complete
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+          </ul>
+          { hasCompletedTodos && completed_section }
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -115,8 +113,10 @@ function tags( todoIdx ){
   }
 
   return (
-    <div>
+    <div className="inline-tags">
+    <div className="row no-gutters">
     {list.map( tagUID => 
+      <div className="col">
       <button 
         key={tagUID}
         className="btn-info btn-sm" 
@@ -133,14 +133,18 @@ function tags( todoIdx ){
           🅧
         </div>
       </button>
+      </div>
     )}
+    <div className="col">
     <button 
       className="btn btn-lg" 
-      style={{ marginLeft: -10, backgroundColor: "transparent" }}
+      style={{ marginLeft: -8, marginTop: -5, backgroundColor: "transparent" }}
       onClick={() =>
         dispatch({ type: "TOGGLE_TAGS_VISIBILITY", payload: todoIdx })
       }
     > + </button>
+    </div>
+    </div>
     </div>
   );
 }
