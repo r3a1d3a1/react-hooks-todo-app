@@ -6,17 +6,22 @@ export default function reducer(state, action) {
         return state;
       }
       // return current state if duplicate
-      if (state.todos.includes(action.payload)) {
+      if (state.todos.map(x => x.title).includes(action.payload)) {
         return state;
       }
       return {
         ...state,
-        todos: [...state.todos, action.payload]
+        todos: [...state.todos, {title: action.payload, completed: false}]
       };
-    case "COMPLETE":
+    case "TOGGLE_COMPLETE":
       return {
         ...state,
-        todos: state.todos.filter(t => t !== action.payload)
+        todos: [...state.todos.filter(t => t !== action.payload), {title: action.payload.title, completed: !action.payload.completed}]
+      };
+    case "TOGGLE_COMPLETED_VISIBILITY":
+      return {
+        ...state,
+        show_completed: !state.show_completed
       };
     default:
       return state;

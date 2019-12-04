@@ -5,10 +5,11 @@ import React from "react";
 const Store = React.createContext({
   todos: [
     // Initial Data
-    "Buy milk",
-    "Some eggs",
-    "Go to work"
-  ]
+    { title: "Buy milk", completed: false },
+    { title: "Some eggs", completed: false },
+    { title: "Go to work", completed: false }
+  ],
+  show_completed: false
 });
 
 export default Store;
