@@ -8,6 +8,7 @@ import { usePersistedContext, usePersistedReducer } from "./usePersist";
 
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
+import TagsModal from "./components/TagsModal";
 
 function App() {
   // create a global store to store the state
@@ -22,8 +23,11 @@ function App() {
   return (
     // State.Provider passes the state and dispatcher to the down
     <Store.Provider value={{ state, dispatch }}>
-      <TodoForm />
-      <TodoList />
+      <div style={ state.show_tags ? { pointerEvents: 'none', opacity: 0.4 } : null }>
+        <TodoForm />
+        <TodoList />
+      </div>
+      {state.show_tags ? <TagsModal /> : null}
     </Store.Provider>
   );
 }
